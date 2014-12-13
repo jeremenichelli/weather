@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+</head>
+<body>
+    <header class="container">
+        <div class="row">
+            <div class="column column-2">
+                <h1>weather</h1>
+                <p class="subtitle">a showcase for Condense.js by Jeremias Menichelli</p>
+            </div>
+            <div class="column column-1">
+                <div id="message-box"></div>
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        <div class="row">
+            <div class="column column-1">
+                <div id="control-box">
+                    <button id="share-location-button" class="control-button">Get weather from here</button>
+                    <input type="text" placeholder="Enter your city name here" value="" id="location-input" class="control-input">
+                    <button id="city-location-button" class="control-button">Get weather for this city</button>
+                </div>
+            </div>
+            <div class="column column-2">
+                <div id="widget-box"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- base template -->
+    <div id="sample-widget" data-condense-units="metric" class="hidden">
+        <div class="column column-1">
+            <img alt="weather icon" data-condense-icon>
+        </div>
+        <div class="column column-2">
+            <h3 class="widget-location">
+                <span data-condense-city></span> <span data-condense-country></span>
+            </h3>
+            <h3 class="widget-condition"><span data-condense-temperature></span>º <span data-condense-description></span></h3>
+            <p>Humidity <span data-condense-humidity></span>%</p>
+            <p>Wind <span data-condense-windSpeed></span>km/h <span data-condense-windDirection></span></p>
+            <p>Pressure <span data-condense-pressure></span>hPa</p>
+        </div>
+    </div>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,300italic,400' rel='stylesheet' type='text/css'>
+    <script src="assets/scripts/main.js"></script>
+</body>
+</html>
