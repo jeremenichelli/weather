@@ -20,6 +20,10 @@ body {
 /* highlight and selection colors */
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    &:focus {
+        outline: 0;
+    }
 }
 
 ::-moz-selection,
@@ -150,7 +154,8 @@ section {
         margin-top: 0;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: @dark-accent; 
     }
 }
