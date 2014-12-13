@@ -205,6 +205,14 @@
                             position.coords.longitude + languageURI + unitsURI;
                         // make request
                         widget.request();
+                    }, function () {
+                        if (typeof widget.onerror === 'function') {
+                            widget.onerror();
+                        }
+                    }, {
+                        maximumAge: 600000,
+                        timeout: 10000,
+                        enableHighAccuracy: true
                     });
                 }
             } else {
@@ -238,29 +246,31 @@
             // parse info for data binding
             obj = _parseInfo(obj, widget);
 
-            // data binding
-            for (var key in obj.data) {
-                var selector = '[data-condense-' + key + ']',
-                    dataElement = element.querySelector(selector);
-                if (dataElement) {
-                    dataElement.innerHTML = obj.data[key];
+            if (obj) {
+                // data binding
+                for (var key in obj.data) {
+                    var selector = '[data-condense-' + key + ']',
+                        dataElement = element.querySelector(selector);
+                    if (dataElement) {
+                        dataElement.innerHTML = obj.data[key];
+                    }
                 }
-            }
 
-            var img = element.querySelector('[data-condense-icon]');
-            
-            // checks if needs to fire a callback after loading the widget
-            if (onload) {
+                var img = element.querySelector('[data-condense-icon]');
+                
+                // checks if needs to fire a callback after loading the widget
+                if (onload) {
+                    if (img) {
+                        // bind onload event to the img onload one
+                        img.onload = onload;
+                    } else {
+                        onload();
+                    }
+                }
+
                 if (img) {
-                    // bind onload event to the img onload one
-                    img.onload = onload;
-                } else {
-                    onload();
+                    img.src = obj.imageSrc;
                 }
-            }
-
-            if (img) {
-                img.src = obj.imageSrc;
             }
 
             widget.rawData = null;
@@ -330,7 +340,9 @@
                 imageSrc: imgUrl + obj.weather[0].icon + imgExtension
             };
         } else {
-            widget.onerror();
+            if (typeof widget.onerror === 'function') {
+                widget.onerror();
+            }
         }
     };
 

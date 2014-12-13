@@ -94,4 +94,10 @@
         _insertLocationWidget();
     }, false);
 
+    w.onkeydown = function (e) {
+        if (e.keyCode === 13) {
+            _insertCityWidget();
+        }
+    };
+
 })(window, document);

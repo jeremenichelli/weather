@@ -17,6 +17,18 @@ body {
     }
 }
 
+/* highlight and selection colors */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+::-moz-selection,
+::-webkit-selection,
+::selection {
+    background-color: @accent;
+    text-shadow: none;
+}
+
 a {
     color: @dark-grey;
 }
