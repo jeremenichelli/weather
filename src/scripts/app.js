@@ -34,6 +34,16 @@
         cityBtn = d.getElementById('city-location-button'),
         cityInput = d.getElementById('location-input');
 
+    function _enableButtons() {
+        locationBtn.removeAttribute('disabled');
+        cityBtn.removeAttribute('disabled');
+    }
+
+    function _disableButtons() {
+        locationBtn.setAttribute('disabled', '');
+        cityBtn.setAttribute('disabled', '');
+    }
+
     function _insertCityWidget() {
         views.widgetBox.innerHTML = '';
 
@@ -45,6 +55,7 @@
         }
 
         message.show('Loading...');
+        _disableButtons();
 
         var newTemplate = baseTemplate.cloneNode(true),
             newWidget = new Condense();
@@ -57,15 +68,19 @@
             message.close();
             views.widgetBox.appendChild(newTemplate);
             newTemplate.removeClass('hidden');
+            _enableButtons();
         }, function () {
             message.show('Location not found', true);
+            _enableButtons();
         });
+
     }
 
     function _insertLocationWidget() {
         views.widgetBox.innerHTML = '';
 
         message.show('Loading...');
+        _disableButtons();
 
         cityInput.value = '';
 
@@ -79,8 +94,10 @@
             message.close();
             views.widgetBox.appendChild(newTemplate);
             newTemplate.removeClass('hidden');
+            _enableButtons();
         }, function () {
             message.show('Location not found', true);
+            _enableButtons();
         });
     }
 

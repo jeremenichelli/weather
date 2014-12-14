@@ -205,14 +205,14 @@
                             position.coords.longitude + languageURI + unitsURI;
                         // make request
                         widget.request();
-                    }, function () {
+                    }, function (error) {
                         if (typeof widget.onerror === 'function') {
                             widget.onerror();
                         }
                     }, {
                         maximumAge: 600000,
-                        timeout: 10000,
-                        enableHighAccuracy: true
+                        timeout: 100000,
+                        enableHighAccuracy: false
                     });
                 }
             } else {

@@ -42,7 +42,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 1.75em;
 }
 
 h3 {
@@ -84,7 +84,7 @@ section {
     }
 
     .widget-location {
-        font-size: 2em;
+        font-size: 1.75em;
     }
 
     .widget-condition {
@@ -158,6 +158,15 @@ section {
     &:focus {
         background-color: @dark-accent; 
     }
+
+    &[disabled] {
+        background-color: @light-grey;
+        cursor: default;
+
+        &:hover {
+            background-color: @light-grey;
+        }
+    }
 }
 
 .subtitle {
@@ -188,8 +197,13 @@ it's works as a base template */
 @media (max-width: 768px) {
 
     header,
-    #message-box {
+    #message-box,
+    #control-box {
         text-align: center;
+    }
+
+    .control-button {
+        margin: 10px auto 30px;
     }
 
     #city-widget,
