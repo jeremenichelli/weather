@@ -5,6 +5,7 @@
 
     w.onload = function () {
         body.addClass('loaded');
+        _enableButtons();
     };
 
     // views
@@ -37,11 +38,13 @@
     function _enableButtons() {
         locationBtn.removeAttribute('disabled');
         cityBtn.removeAttribute('disabled');
+        cityInput.removeAttribute('disabled');
     }
 
     function _disableButtons() {
         locationBtn.setAttribute('disabled', '');
         cityBtn.setAttribute('disabled', '');
+        cityInput.setAttribute('disabled', '');
     }
 
     function _insertCityWidget() {
