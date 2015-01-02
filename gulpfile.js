@@ -45,7 +45,7 @@ gulp.task('minify:scripts', [ 'concat:scripts' ], function () {
             .pipe(uglify())
             .pipe(gulp.dest(paths.output.scripts));
     } else {
-        log(colors.red('Scripts have not been minified!'));
+        log(colors.red('(--u) Scripts have not been minified!'));
     }
 });
 
@@ -64,7 +64,7 @@ gulp.task('minify:styles', [ 'concat:styles' ], function () {
             .pipe(minifyCss())
             .pipe(gulp.dest(paths.output.styles));
     } else {
-        log(colors.red('Styles have not been minifided!'))
+        log(colors.red('(--u) Styles have not been minifided!'))
     }
 });
 

@@ -47,76 +47,64 @@
         cityInput.setAttribute('disabled', '');
     }
 
-    function _insertCityWidget() {
+    function _insertWidget(type) {
+        var newTemplate = baseTemplate.cloneNode(true),
+            newWidget = new Condense();
+
         views.widgetBox.innerHTML = '';
 
         message.close();
 
-        if (cityInput.value === '') {
-            message.show('Please insert a city name', true);
-            return;
+        if (type === 'byInput') {
+            if (cityInput.value === '') {
+                message.show('Please insert a city name', true);
+                return;
+            }
+            newTemplate.setAttribute('data-condense-location', cityInput.value);
+            newTemplate.id = 'city-widget';
+            newWidget.set(newTemplate, function (code) {
+                message.close();
+                views.widgetBox.appendChild(newTemplate);
+                newTemplate.removeClass('hidden');
+                _enableButtons();
+                console.log(code);
+            }, function () {
+                message.show('Location not found', true);
+                _enableButtons();
+            });
+        }
+
+        if (type === 'byGeolocation') {
+            cityInput.value = '';
+            newTemplate.id = 'location-widget';
+            newWidget.set(newTemplate, function (code) {
+                message.close();
+                views.widgetBox.appendChild(newTemplate);
+                newTemplate.removeClass('hidden');
+                _enableButtons();
+            }, function () {
+                message.show('Location not found', true);
+                _enableButtons();
+            });
         }
 
         message.show('Loading...');
         _disableButtons();
-
-        var newTemplate = baseTemplate.cloneNode(true),
-            newWidget = new Condense();
-
-        newTemplate.id = 'city-widget';
-        newTemplate.setAttribute('data-condense-location', cityInput.value);
-        views.widgetBox.appendChild(newTemplate);
-
-        newWidget.set(newTemplate, function () {
-            message.close();
-            views.widgetBox.appendChild(newTemplate);
-            newTemplate.removeClass('hidden');
-            _enableButtons();
-        }, function () {
-            message.show('Location not found', true);
-            _enableButtons();
-        });
-
-    }
-
-    function _insertLocationWidget() {
-        views.widgetBox.innerHTML = '';
-
-        message.show('Loading...');
-        _disableButtons();
-
-        cityInput.value = '';
-
-        var newTemplate = baseTemplate.cloneNode(true),
-            newWidget = new Condense();
-
-        newTemplate.id = 'location-widget';
-        views.widgetBox.appendChild(newTemplate);
-
-        newWidget.set(newTemplate, function () {
-            message.close();
-            views.widgetBox.appendChild(newTemplate);
-            newTemplate.removeClass('hidden');
-            _enableButtons();
-        }, function () {
-            message.show('Location not found', true);
-            _enableButtons();
-        });
     }
 
     cityBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        _insertCityWidget();
+        _insertWidget('byInput');
     }, false);
 
     locationBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        _insertLocationWidget();
+        _insertWidget('byGeolocation');
     }, false);
 
     w.onkeydown = function (e) {
         if (e.keyCode === 13) {
-            _insertCityWidget();
+            _insertWidget('byInput');
         }
     };
 
