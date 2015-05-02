@@ -62,12 +62,11 @@
             }
             newTemplate.setAttribute('data-condense-location', cityInput.value);
             newTemplate.id = 'city-widget';
-            newWidget.set(newTemplate, function (code) {
+            newWidget.set(newTemplate, function () {
                 message.close();
                 views.widgetBox.appendChild(newTemplate);
                 newTemplate.removeClass('hidden');
                 _enableButtons();
-                console.log(code);
             }, function () {
                 message.show('Location not found', true);
                 _enableButtons();
@@ -77,7 +76,7 @@
         if (type === 'byGeolocation') {
             cityInput.value = '';
             newTemplate.id = 'location-widget';
-            newWidget.set(newTemplate, function (code) {
+            newWidget.set(newTemplate, function () {
                 message.close();
                 views.widgetBox.appendChild(newTemplate);
                 newTemplate.removeClass('hidden');
