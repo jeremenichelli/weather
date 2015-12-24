@@ -227,6 +227,9 @@
             var widget = this,
                 url = encodeURI(widget.url);
 
+            // add api key
+            url += '&APPID=8a9fddf3938ff20a939357ee9aaad67c';
+
             widget.showMessage('Looking for the weather');
 
             // use jabiru for API call
